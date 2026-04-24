@@ -19,8 +19,10 @@ The data is sourced directly from TypeScript's official `lib.es*.d.ts` and `lib.
 ## Install
 
 ```bash
-npm install -g js-ref
+npm install -g @esrid/js-ref
 ```
+
+Requires [Bun](https://bun.sh).
 
 Requires [Bun](https://bun.sh).
 
@@ -82,11 +84,6 @@ js-ref --completion bash >> ~/.bashrc && source ~/.bashrc
 js-ref --completion fish >> ~/.config/fish/completions/js-ref.fish
 ```
 
-## Alias
-
-```bash
-echo "alias jsdoc='js-ref'" >> ~/.zshrc
-```
 
 ## How it works
 
@@ -106,4 +103,3 @@ bun run build:db
 ## License
 
 MIT
-# js-ref
