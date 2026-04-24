@@ -1,6 +1,7 @@
 import { readSync } from "fs"
 import { spawnSync } from "child_process"
 import db from "./db.json"
+import pkg from "./package.json"
 import type { Entry } from "./types"
 
 const DB = db as Record<string, Entry>
@@ -252,6 +253,7 @@ ${c("bold", "Usage:")}
   js-ref --fzf                  interactive search with fzf
   js-ref --list                 list all entries
   js-ref --completion <shell>   print shell completion script (zsh/bash/fish)
+  js-ref --version              print version
   js-ref --help                 show this help
 
 ${c("bold", "Examples:")}
@@ -308,6 +310,9 @@ function main(): void {
       fzfMode = true
     } else if (arg === "--completion" && argv[i + 1]) {
       completion = argv[++i]
+    } else if (arg === "--version" || arg === "-v") {
+      console.log(pkg.version)
+      process.exit(0)
     } else if (arg === "--help" || arg === "-h") {
       printHelp()
       process.exit(0)
