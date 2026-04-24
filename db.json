@@ -75393,6 +75393,280 @@
     "returns": "",
     "year": 2020
   },
+  "Date.prototype.toLocaleString": {
+    "key": "Date.prototype.toLocaleString",
+    "signatures": [
+      "toLocaleString(locales?: Intl.LocalesArgument, options?: Intl.DateTimeFormatOptions): string",
+      "toLocaleString(): string",
+      "toLocaleString(locales?: string | string[], options?: Intl.DateTimeFormatOptions): string"
+    ],
+    "doc": "Converts a date and time to a string by using the current or specified locale.",
+    "params": [
+      {
+        "name": "locales",
+        "type": "",
+        "doc": "A locale string, array of locale strings, Intl.Locale object, or array of Intl.Locale objects that contain one or more language or locale tags. If you include more than one locale string, list them in descending order of priority so that the first entry is the preferred locale. If you omit this parameter, the default locale of the JavaScript runtime is used."
+      },
+      {
+        "name": "options",
+        "type": "",
+        "doc": "An object that contains one or more properties that specify comparison options."
+      }
+    ],
+    "returns": "",
+    "year": 5
+  },
+  "Date.prototype.toLocaleDateString": {
+    "key": "Date.prototype.toLocaleDateString",
+    "signatures": [
+      "toLocaleDateString(locales?: Intl.LocalesArgument, options?: Intl.DateTimeFormatOptions): string",
+      "toLocaleDateString(): string",
+      "toLocaleDateString(locales?: string | string[], options?: Intl.DateTimeFormatOptions): string"
+    ],
+    "doc": "Converts a date to a string by using the current or specified locale.",
+    "params": [
+      {
+        "name": "locales",
+        "type": "",
+        "doc": "A locale string, array of locale strings, Intl.Locale object, or array of Intl.Locale objects that contain one or more language or locale tags. If you include more than one locale string, list them in descending order of priority so that the first entry is the preferred locale. If you omit this parameter, the default locale of the JavaScript runtime is used."
+      },
+      {
+        "name": "options",
+        "type": "",
+        "doc": "An object that contains one or more properties that specify comparison options."
+      }
+    ],
+    "returns": "",
+    "year": 5
+  },
+  "Date.prototype.toLocaleTimeString": {
+    "key": "Date.prototype.toLocaleTimeString",
+    "signatures": [
+      "toLocaleTimeString(locales?: Intl.LocalesArgument, options?: Intl.DateTimeFormatOptions): string",
+      "toLocaleTimeString(): string",
+      "toLocaleTimeString(locales?: string | string[], options?: Intl.DateTimeFormatOptions): string"
+    ],
+    "doc": "Converts a time to a string by using the current or specified locale.",
+    "params": [
+      {
+        "name": "locales",
+        "type": "",
+        "doc": "A locale string, array of locale strings, Intl.Locale object, or array of Intl.Locale objects that contain one or more language or locale tags. If you include more than one locale string, list them in descending order of priority so that the first entry is the preferred locale. If you omit this parameter, the default locale of the JavaScript runtime is used."
+      },
+      {
+        "name": "options",
+        "type": "",
+        "doc": "An object that contains one or more properties that specify comparison options."
+      }
+    ],
+    "returns": "",
+    "year": 5
+  },
+  "Number.prototype.toLocaleString": {
+    "key": "Number.prototype.toLocaleString",
+    "signatures": [
+      "toLocaleString(locales?: Intl.LocalesArgument, options?: Intl.NumberFormatOptions): string",
+      "toLocaleString(locales?: string | string[], options?: Intl.NumberFormatOptions): string"
+    ],
+    "doc": "Converts a number to a string by using the current or specified locale.",
+    "params": [
+      {
+        "name": "locales",
+        "type": "",
+        "doc": "A locale string, array of locale strings, Intl.Locale object, or array of Intl.Locale objects that contain one or more language or locale tags. If you include more than one locale string, list them in descending order of priority so that the first entry is the preferred locale. If you omit this parameter, the default locale of the JavaScript runtime is used."
+      },
+      {
+        "name": "options",
+        "type": "",
+        "doc": "An object that contains one or more properties that specify comparison options."
+      }
+    ],
+    "returns": "",
+    "year": 5
+  },
+  "PromiseFulfilledResult.prototype.status": {
+    "key": "PromiseFulfilledResult.prototype.status",
+    "signatures": [
+      "status: \"fulfilled\""
+    ],
+    "doc": "",
+    "params": [],
+    "returns": "",
+    "year": 2020
+  },
+  "PromiseFulfilledResult.prototype.value": {
+    "key": "PromiseFulfilledResult.prototype.value",
+    "signatures": [
+      "value: T"
+    ],
+    "doc": "",
+    "params": [],
+    "returns": "",
+    "year": 2020
+  },
+  "PromiseRejectedResult.prototype.status": {
+    "key": "PromiseRejectedResult.prototype.status",
+    "signatures": [
+      "status: \"rejected\""
+    ],
+    "doc": "",
+    "params": [],
+    "returns": "",
+    "year": 2020
+  },
+  "PromiseRejectedResult.prototype.reason": {
+    "key": "PromiseRejectedResult.prototype.reason",
+    "signatures": [
+      "reason: any"
+    ],
+    "doc": "",
+    "params": [],
+    "returns": "",
+    "year": 2020
+  },
+  "Promise.allSettled": {
+    "key": "Promise.allSettled",
+    "signatures": [
+      "allSettled<T extends readonly unknown[] | []>(values: T): Promise<{ -readonly [P in keyof T]: PromiseSettledResult<Awaited<T[P]>>; }>",
+      "allSettled<T>(values: Iterable<T | PromiseLike<T>>): Promise<PromiseSettledResult<Awaited<T>>[]>"
+    ],
+    "doc": "Creates a Promise that is resolved with an array of results when all\nof the provided Promises resolve or reject.",
+    "params": [
+      {
+        "name": "values",
+        "type": "",
+        "doc": "An array of Promises."
+      }
+    ],
+    "returns": "A new Promise.",
+    "year": 2020
+  },
+  "Atomics.prototype.add": {
+    "key": "Atomics.prototype.add",
+    "signatures": [
+      "add(typedArray: BigInt64Array<ArrayBufferLike> | BigUint64Array<ArrayBufferLike>, index: number, value: bigint): bigint"
+    ],
+    "doc": "Adds a value to the value at the given position in the array, returning the original value.\nUntil this atomic operation completes, any other read or write operation against the array\nwill block.",
+    "params": [],
+    "returns": "",
+    "year": 2020
+  },
+  "Atomics.prototype.and": {
+    "key": "Atomics.prototype.and",
+    "signatures": [
+      "and(typedArray: BigInt64Array<ArrayBufferLike> | BigUint64Array<ArrayBufferLike>, index: number, value: bigint): bigint"
+    ],
+    "doc": "Stores the bitwise AND of a value with the value at the given position in the array,\nreturning the original value. Until this atomic operation completes, any other read or\nwrite operation against the array will block.",
+    "params": [],
+    "returns": "",
+    "year": 2020
+  },
+  "Atomics.prototype.compareExchange": {
+    "key": "Atomics.prototype.compareExchange",
+    "signatures": [
+      "compareExchange(typedArray: BigInt64Array<ArrayBufferLike> | BigUint64Array<ArrayBufferLike>, index: number, expectedValue: bigint, replacementValue: bigint): bigint"
+    ],
+    "doc": "Replaces the value at the given position in the array if the original value equals the given\nexpected value, returning the original value. Until this atomic operation completes, any\nother read or write operation against the array will block.",
+    "params": [],
+    "returns": "",
+    "year": 2020
+  },
+  "Atomics.prototype.exchange": {
+    "key": "Atomics.prototype.exchange",
+    "signatures": [
+      "exchange(typedArray: BigInt64Array<ArrayBufferLike> | BigUint64Array<ArrayBufferLike>, index: number, value: bigint): bigint"
+    ],
+    "doc": "Replaces the value at the given position in the array, returning the original value. Until\nthis atomic operation completes, any other read or write operation against the array will\nblock.",
+    "params": [],
+    "returns": "",
+    "year": 2020
+  },
+  "Atomics.prototype.load": {
+    "key": "Atomics.prototype.load",
+    "signatures": [
+      "load(typedArray: BigInt64Array<ArrayBufferLike> | BigUint64Array<ArrayBufferLike>, index: number): bigint"
+    ],
+    "doc": "Returns the value at the given position in the array. Until this atomic operation completes,\nany other read or write operation against the array will block.",
+    "params": [],
+    "returns": "",
+    "year": 2020
+  },
+  "Atomics.prototype.or": {
+    "key": "Atomics.prototype.or",
+    "signatures": [
+      "or(typedArray: BigInt64Array<ArrayBufferLike> | BigUint64Array<ArrayBufferLike>, index: number, value: bigint): bigint"
+    ],
+    "doc": "Stores the bitwise OR of a value with the value at the given position in the array,\nreturning the original value. Until this atomic operation completes, any other read or write\noperation against the array will block.",
+    "params": [],
+    "returns": "",
+    "year": 2020
+  },
+  "Atomics.prototype.store": {
+    "key": "Atomics.prototype.store",
+    "signatures": [
+      "store(typedArray: BigInt64Array<ArrayBufferLike> | BigUint64Array<ArrayBufferLike>, index: number, value: bigint): bigint"
+    ],
+    "doc": "Stores a value at the given position in the array, returning the new value. Until this\natomic operation completes, any other read or write operation against the array will block.",
+    "params": [],
+    "returns": "",
+    "year": 2020
+  },
+  "Atomics.prototype.sub": {
+    "key": "Atomics.prototype.sub",
+    "signatures": [
+      "sub(typedArray: BigInt64Array<ArrayBufferLike> | BigUint64Array<ArrayBufferLike>, index: number, value: bigint): bigint"
+    ],
+    "doc": "Subtracts a value from the value at the given position in the array, returning the original\nvalue. Until this atomic operation completes, any other read or write operation against the\narray will block.",
+    "params": [],
+    "returns": "",
+    "year": 2020
+  },
+  "Atomics.prototype.wait": {
+    "key": "Atomics.prototype.wait",
+    "signatures": [
+      "wait(typedArray: BigInt64Array<ArrayBufferLike>, index: number, value: bigint, timeout?: number): \"ok\" | \"not-equal\" | \"timed-out\""
+    ],
+    "doc": "If the value at the given position in the array is equal to the provided value, the current\nagent is put to sleep causing execution to suspend until the timeout expires (returning\n`\"timed-out\"`) or until the agent is awoken (returning `\"ok\"`); otherwise, returns\n`\"not-equal\"`.",
+    "params": [],
+    "returns": "",
+    "year": 2020
+  },
+  "Atomics.prototype.notify": {
+    "key": "Atomics.prototype.notify",
+    "signatures": [
+      "notify(typedArray: BigInt64Array<ArrayBufferLike>, index: number, count?: number): number"
+    ],
+    "doc": "Wakes up sleeping agents that are waiting on the given index of the array, returning the\nnumber of agents that were awoken.",
+    "params": [
+      {
+        "name": "typedArray",
+        "type": "",
+        "doc": "A shared BigInt64Array."
+      },
+      {
+        "name": "index",
+        "type": "",
+        "doc": "The position in the typedArray to wake up on."
+      },
+      {
+        "name": "count",
+        "type": "",
+        "doc": "The number of sleeping agents to notify. Defaults to +Infinity."
+      }
+    ],
+    "returns": "",
+    "year": 2020
+  },
+  "Atomics.prototype.xor": {
+    "key": "Atomics.prototype.xor",
+    "signatures": [
+      "xor(typedArray: BigInt64Array<ArrayBufferLike> | BigUint64Array<ArrayBufferLike>, index: number, value: bigint): bigint"
+    ],
+    "doc": "Stores the bitwise XOR of a value with the value at the given position in the array,\nreturning the original value. Until this atomic operation completes, any other read or write\noperation against the array will block.",
+    "params": [],
+    "returns": "",
+    "year": 2020
+  },
   "String.prototype.matchAll": {
     "key": "String.prototype.matchAll",
     "signatures": [
@@ -75459,6 +75733,42 @@
     "returns": "",
     "year": 5
   },
+  "Symbol.matchAll": {
+    "key": "Symbol.matchAll",
+    "signatures": [
+      "matchAll: unique symbol"
+    ],
+    "doc": "A regular expression method that matches the regular expression against a string. Called\nby the String.prototype.matchAll method.",
+    "params": [],
+    "returns": "",
+    "year": 2020
+  },
+  "RegExpStringIterator.prototype.[Symbol.iterator]": {
+    "key": "RegExpStringIterator.prototype.[Symbol.iterator]",
+    "signatures": [
+      "[Symbol.iterator](): RegExpStringIterator<T>"
+    ],
+    "doc": "",
+    "params": [],
+    "returns": "",
+    "year": 2020
+  },
+  "RegExp.prototype.[Symbol.matchAll]": {
+    "key": "RegExp.prototype.[Symbol.matchAll]",
+    "signatures": [
+      "[Symbol.matchAll](str: string): RegExpStringIterator<RegExpMatchArray>"
+    ],
+    "doc": "Matches a string with this regular expression, and returns an iterable of matches\ncontaining the results of that search.",
+    "params": [
+      {
+        "name": "string",
+        "type": "",
+        "doc": "A string to search within."
+      }
+    ],
+    "returns": "",
+    "year": 2020
+  },
   "AggregateError.prototype.errors": {
     "key": "AggregateError.prototype.errors",
     "signatures": [
@@ -75515,6 +75825,98 @@
         "doc": "A string containing the text to replace for every successful match of searchValue in this string."
       }
     ],
+    "returns": "",
+    "year": 2021
+  },
+  "WeakRef.prototype.deref": {
+    "key": "WeakRef.prototype.deref",
+    "signatures": [
+      "deref(): T | undefined"
+    ],
+    "doc": "Returns the WeakRef instance's target value, or undefined if the target value has been\nreclaimed.\nIn es2023 the value can be either a symbol or an object, in previous versions only object is permissible.",
+    "params": [],
+    "returns": "",
+    "year": 2021
+  },
+  "WeakRef.prototype.[Symbol.toStringTag]": {
+    "key": "WeakRef.prototype.[Symbol.toStringTag]",
+    "signatures": [
+      "[Symbol.toStringTag]: \"WeakRef\""
+    ],
+    "doc": "",
+    "params": [],
+    "returns": "",
+    "year": 2021
+  },
+  "WeakRefConstructor.prototype": {
+    "key": "WeakRefConstructor.prototype",
+    "signatures": [
+      "prototype: WeakRef<any>"
+    ],
+    "doc": "",
+    "params": [],
+    "returns": "",
+    "year": 2021
+  },
+  "FinalizationRegistry.prototype.register": {
+    "key": "FinalizationRegistry.prototype.register",
+    "signatures": [
+      "register(target: WeakKey, heldValue: T, unregisterToken?: WeakKey): void"
+    ],
+    "doc": "Registers a value with the registry.\nIn es2023 the value can be either a symbol or an object, in previous versions only object is permissible.",
+    "params": [
+      {
+        "name": "target",
+        "type": "",
+        "doc": "The target value to register."
+      },
+      {
+        "name": "heldValue",
+        "type": "",
+        "doc": "The value to pass to the finalizer for this value. This cannot be the"
+      },
+      {
+        "name": "unregisterToken",
+        "type": "",
+        "doc": "The token to pass to the unregister method to unregister the target"
+      }
+    ],
+    "returns": "",
+    "year": 2021
+  },
+  "FinalizationRegistry.prototype.unregister": {
+    "key": "FinalizationRegistry.prototype.unregister",
+    "signatures": [
+      "unregister(unregisterToken: WeakKey): boolean"
+    ],
+    "doc": "Unregisters a value from the registry.\nIn es2023 the value can be either a symbol or an object, in previous versions only object is permissible.",
+    "params": [
+      {
+        "name": "unregisterToken",
+        "type": "",
+        "doc": "The token that was used as the unregisterToken argument when calling"
+      }
+    ],
+    "returns": "",
+    "year": 2021
+  },
+  "FinalizationRegistry.prototype.[Symbol.toStringTag]": {
+    "key": "FinalizationRegistry.prototype.[Symbol.toStringTag]",
+    "signatures": [
+      "[Symbol.toStringTag]: \"FinalizationRegistry\""
+    ],
+    "doc": "",
+    "params": [],
+    "returns": "",
+    "year": 2021
+  },
+  "FinalizationRegistryConstructor.prototype": {
+    "key": "FinalizationRegistryConstructor.prototype",
+    "signatures": [
+      "prototype: FinalizationRegistry<any>"
+    ],
+    "doc": "",
+    "params": [],
     "returns": "",
     "year": 2021
   },
@@ -75726,6 +76128,26 @@
     "returns": "",
     "year": 2022
   },
+  "ErrorOptions.prototype.cause": {
+    "key": "ErrorOptions.prototype.cause",
+    "signatures": [
+      "cause: unknown"
+    ],
+    "doc": "",
+    "params": [],
+    "returns": "",
+    "year": 2022
+  },
+  "Error.prototype.cause": {
+    "key": "Error.prototype.cause",
+    "signatures": [
+      "cause: unknown"
+    ],
+    "doc": "",
+    "params": [],
+    "returns": "",
+    "year": 2022
+  },
   "Object.hasOwn": {
     "key": "Object.hasOwn",
     "signatures": [
@@ -75744,6 +76166,46 @@
         "doc": "A property name."
       }
     ],
+    "returns": "",
+    "year": 2022
+  },
+  "RegExpMatchArray.prototype.indices": {
+    "key": "RegExpMatchArray.prototype.indices",
+    "signatures": [
+      "indices: RegExpIndicesArray"
+    ],
+    "doc": "",
+    "params": [],
+    "returns": "",
+    "year": 2022
+  },
+  "RegExpExecArray.prototype.indices": {
+    "key": "RegExpExecArray.prototype.indices",
+    "signatures": [
+      "indices: RegExpIndicesArray"
+    ],
+    "doc": "",
+    "params": [],
+    "returns": "",
+    "year": 2022
+  },
+  "RegExpIndicesArray.prototype.groups": {
+    "key": "RegExpIndicesArray.prototype.groups",
+    "signatures": [
+      "groups: {\n        [key: string]: [number, number];\n    }"
+    ],
+    "doc": "",
+    "params": [],
+    "returns": "",
+    "year": 2022
+  },
+  "RegExp.prototype.hasIndices": {
+    "key": "RegExp.prototype.hasIndices",
+    "signatures": [
+      "hasIndices: boolean"
+    ],
+    "doc": "Returns a Boolean value indicating the state of the hasIndices flag (d) used with a regular expression.\nDefault is false. Read-only.",
+    "params": [],
     "returns": "",
     "year": 2022
   },
@@ -76996,6 +77458,185 @@
     "params": [],
     "returns": "",
     "year": 2023
+  },
+  "ArrayBuffer.prototype.resize": {
+    "key": "ArrayBuffer.prototype.resize",
+    "signatures": [
+      "resize(newByteLength?: number): void"
+    ],
+    "doc": "Resizes the ArrayBuffer to the specified size (in bytes).\n\n[MDN](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer/resize)",
+    "params": [],
+    "returns": "",
+    "year": 2024
+  },
+  "ArrayBuffer.prototype.transfer": {
+    "key": "ArrayBuffer.prototype.transfer",
+    "signatures": [
+      "transfer(newByteLength?: number): ArrayBuffer"
+    ],
+    "doc": "Creates a new ArrayBuffer with the same byte content as this buffer, then detaches this buffer.\n\n[MDN](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer/transfer)",
+    "params": [],
+    "returns": "",
+    "year": 2024
+  },
+  "ArrayBuffer.prototype.transferToFixedLength": {
+    "key": "ArrayBuffer.prototype.transferToFixedLength",
+    "signatures": [
+      "transferToFixedLength(newByteLength?: number): ArrayBuffer"
+    ],
+    "doc": "Creates a new non-resizable ArrayBuffer with the same byte content as this buffer, then detaches this buffer.\n\n[MDN](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer/transferToFixedLength)",
+    "params": [],
+    "returns": "",
+    "year": 2024
+  },
+  "Map.groupBy": {
+    "key": "Map.groupBy",
+    "signatures": [
+      "groupBy<K, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Map<K, T[]>"
+    ],
+    "doc": "Groups members of an iterable according to the return value of the passed callback.",
+    "params": [
+      {
+        "name": "items",
+        "type": "",
+        "doc": "An iterable."
+      },
+      {
+        "name": "keySelector",
+        "type": "",
+        "doc": "A callback which will be invoked for each item in items."
+      }
+    ],
+    "returns": "",
+    "year": 2024
+  },
+  "Object.groupBy": {
+    "key": "Object.groupBy",
+    "signatures": [
+      "groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>"
+    ],
+    "doc": "Groups members of an iterable according to the return value of the passed callback.",
+    "params": [
+      {
+        "name": "items",
+        "type": "",
+        "doc": "An iterable."
+      },
+      {
+        "name": "keySelector",
+        "type": "",
+        "doc": "A callback which will be invoked for each item in items."
+      }
+    ],
+    "returns": "",
+    "year": 2024
+  },
+  "PromiseWithResolvers.prototype.promise": {
+    "key": "PromiseWithResolvers.prototype.promise",
+    "signatures": [
+      "promise: Promise<T>"
+    ],
+    "doc": "",
+    "params": [],
+    "returns": "",
+    "year": 2024
+  },
+  "PromiseWithResolvers.prototype.resolve": {
+    "key": "PromiseWithResolvers.prototype.resolve",
+    "signatures": [
+      "resolve: (value: T | PromiseLike<T>) => void"
+    ],
+    "doc": "",
+    "params": [],
+    "returns": "",
+    "year": 2024
+  },
+  "PromiseWithResolvers.prototype.reject": {
+    "key": "PromiseWithResolvers.prototype.reject",
+    "signatures": [
+      "reject: (reason?: any) => void"
+    ],
+    "doc": "",
+    "params": [],
+    "returns": "",
+    "year": 2024
+  },
+  "Promise.withResolvers": {
+    "key": "Promise.withResolvers",
+    "signatures": [
+      "withResolvers<T>(): PromiseWithResolvers<T>"
+    ],
+    "doc": "Creates a new Promise and returns it in an object, along with its resolve and reject functions.",
+    "params": [],
+    "returns": "An object with the properties `promise`, `resolve`, and `reject`.\n     *\n     * ```ts\n     * const { promise, resolve, reject } = Promise.withResolvers<T>();\n     * ```",
+    "year": 2024
+  },
+  "RegExp.prototype.unicodeSets": {
+    "key": "RegExp.prototype.unicodeSets",
+    "signatures": [
+      "unicodeSets: boolean"
+    ],
+    "doc": "Returns a Boolean value indicating the state of the unicodeSets flag (v) used with a regular expression.\nDefault is false. Read-only.",
+    "params": [],
+    "returns": "",
+    "year": 2024
+  },
+  "Atomics.prototype.waitAsync": {
+    "key": "Atomics.prototype.waitAsync",
+    "signatures": [
+      "waitAsync(typedArray: Int32Array, index: number, value: number, timeout?: number): { async: false; value: \"not-equal\" | \"timed-out\"; } | { async: true; value: Promise<\"ok\" | \"timed-out\">; }",
+      "waitAsync(typedArray: BigInt64Array, index: number, value: bigint, timeout?: number): { async: false; value: \"not-equal\" | \"timed-out\"; } | { async: true; value: Promise<\"ok\" | \"timed-out\">; }"
+    ],
+    "doc": "A non-blocking, asynchronous version of wait which is usable on the main thread.\nWaits asynchronously on a shared memory location and returns a Promise",
+    "params": [
+      {
+        "name": "typedArray",
+        "type": "",
+        "doc": "A shared Int32Array or BigInt64Array."
+      },
+      {
+        "name": "index",
+        "type": "",
+        "doc": "The position in the typedArray to wait on."
+      },
+      {
+        "name": "value",
+        "type": "",
+        "doc": "The expected value to test."
+      }
+    ],
+    "returns": "",
+    "year": 2024
+  },
+  "SharedArrayBuffer.prototype.grow": {
+    "key": "SharedArrayBuffer.prototype.grow",
+    "signatures": [
+      "grow(newByteLength?: number): void"
+    ],
+    "doc": "Grows the SharedArrayBuffer to the specified size (in bytes).\n\n[MDN](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer/grow)",
+    "params": [],
+    "returns": "",
+    "year": 2024
+  },
+  "String.prototype.isWellFormed": {
+    "key": "String.prototype.isWellFormed",
+    "signatures": [
+      "isWellFormed(): boolean"
+    ],
+    "doc": "Returns true if all leading surrogates and trailing surrogates appear paired and in order.",
+    "params": [],
+    "returns": "",
+    "year": 2024
+  },
+  "String.prototype.toWellFormed": {
+    "key": "String.prototype.toWellFormed",
+    "signatures": [
+      "toWellFormed(): string"
+    ],
+    "doc": "Returns a string where all lone or out-of-order surrogates have been replaced by the Unicode replacement character (U+FFFD).",
+    "params": [],
+    "returns": "",
+    "year": 2024
   },
   "Symbol.prototype.toString": {
     "key": "Symbol.prototype.toString",
@@ -78533,39 +79174,6 @@
       "toTimeString(): string"
     ],
     "doc": "Returns a time as a string value.",
-    "params": [],
-    "returns": "",
-    "year": 5
-  },
-  "Date.prototype.toLocaleString": {
-    "key": "Date.prototype.toLocaleString",
-    "signatures": [
-      "toLocaleString(): string",
-      "toLocaleString(locales?: string | string[], options?: Intl.DateTimeFormatOptions): string"
-    ],
-    "doc": "Returns a value as a string value appropriate to the host environment's current locale.",
-    "params": [],
-    "returns": "",
-    "year": 5
-  },
-  "Date.prototype.toLocaleDateString": {
-    "key": "Date.prototype.toLocaleDateString",
-    "signatures": [
-      "toLocaleDateString(): string",
-      "toLocaleDateString(locales?: string | string[], options?: Intl.DateTimeFormatOptions): string"
-    ],
-    "doc": "Returns a date as a string value appropriate to the host environment's current locale.",
-    "params": [],
-    "returns": "",
-    "year": 5
-  },
-  "Date.prototype.toLocaleTimeString": {
-    "key": "Date.prototype.toLocaleTimeString",
-    "signatures": [
-      "toLocaleTimeString(): string",
-      "toLocaleTimeString(locales?: string | string[], options?: Intl.DateTimeFormatOptions): string"
-    ],
-    "doc": "Returns a time as a string value appropriate to the host environment's current locale.",
     "params": [],
     "returns": "",
     "year": 5
@@ -85636,27 +86244,6 @@
     ],
     "doc": "The size in bytes of each element in the array.",
     "params": [],
-    "returns": "",
-    "year": 5
-  },
-  "Number.prototype.toLocaleString": {
-    "key": "Number.prototype.toLocaleString",
-    "signatures": [
-      "toLocaleString(locales?: string | string[], options?: Intl.NumberFormatOptions): string"
-    ],
-    "doc": "Converts a number to a string by using the current or specified locale.",
-    "params": [
-      {
-        "name": "locales",
-        "type": "",
-        "doc": "A locale string or array of locale strings that contain one or more language or locale tags. If you include more than one locale string, list them in descending order of priority so that the first entry is the preferred locale. If you omit this parameter, the default locale of the JavaScript runtime is used."
-      },
-      {
-        "name": "options",
-        "type": "",
-        "doc": "An object that contains one or more properties that specify comparison options."
-      }
-    ],
     "returns": "",
     "year": 5
   }
