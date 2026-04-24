@@ -21,9 +21,6 @@ The data is sourced directly from TypeScript's official `lib.es*.d.ts` and `lib.
 ```bash
 npm install -g @esrid/js-ref
 ```
-
-Requires [Bun](https://bun.sh).
-
 Requires [Bun](https://bun.sh).
 
 ## Usage
