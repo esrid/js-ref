@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+if ! command -v bun >/dev/null 2>&1; then
+  echo "jsdoc-cli requires bun. Install: curl -fsSL https://bun.sh/install | bash" >&2
+  exit 1
+fi
+# resolve symlinks so this works when called via npm global install
+SCRIPT="$0"
+while [ -L "$SCRIPT" ]; do
+  DIR=$(cd "$(dirname "$SCRIPT")" && pwd)
+  SCRIPT=$(readlink "$SCRIPT")
+  case "$SCRIPT" in /*) ;; *) SCRIPT="$DIR/$SCRIPT" ;; esac
+done
+DIR=$(cd "$(dirname "$SCRIPT")" && pwd)
+exec bun run "$DIR/index.ts" -- "$@"

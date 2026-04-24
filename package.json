@@ -1,0 +1,34 @@
+{
+  "name": "@esrid/js-ref",
+  "version": "0.1.0",
+  "description": "Terminal documentation browser for JavaScript built-in and DOM APIs",
+  "module": "index.ts",
+  "type": "module",
+  "bin": {
+    "js-ref": "./jsref"
+  },
+  "files": [
+    "index.ts",
+    "types.ts",
+    "db.json",
+    "jsref",
+    "completions/"
+  ],
+  "scripts": {
+    "build:db": "bun run build.ts",
+    "build:bin": "bun build --compile --minify index.ts --outfile js-ref-bin"
+  },
+  "keywords": ["javascript", "documentation", "cli", "builtins", "dom"],
+  "license": "MIT",
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^25.6.0",
+    "ts-morph": "^28.0.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
