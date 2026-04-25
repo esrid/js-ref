@@ -1,6 +1,6 @@
 {
   "name": "@esrid/js-ref",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Terminal documentation browser for JavaScript built-in and DOM APIs",
   "module": "index.ts",
   "type": "module",
