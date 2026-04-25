@@ -181,7 +181,12 @@ function print(output: string): void {
     return
   }
   const pager = resolvePager()
-  const flags = pager === "bat" ? ["--paging=always", "--color=always"] : ["-R"]
+  const flags =
+    pager === "bat"
+      ? ["--paging=always", "--color=always"]
+      : pager === "less"
+        ? ["-R"]
+        : []
   const result = spawnSync(pager, flags, {
     input: output,
     stdio: ["pipe", "inherit", "inherit"],
