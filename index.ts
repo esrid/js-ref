@@ -1,5 +1,7 @@
-import { readSync } from "fs"
+import { readSync, appendFileSync, readFileSync, mkdirSync, existsSync } from "fs"
 import { spawnSync } from "child_process"
+import { homedir } from "os"
+import { join, dirname, basename, resolve } from "path"
 import db from "./db.json"
 import pkg from "./package.json"
 import type { Entry } from "./types"
@@ -9,6 +11,9 @@ const keys = Object.keys(DB)
 
 // --- colors ---
 
+const USE_COLOR = process.stdout.isTTY && !process.env.NO_COLOR && !process.env.CI
+const IS_INTERACTIVE = process.stdin.isTTY && !process.env.CI
+
 const C = {
   reset: "\x1b[0m",
   bold: "\x1b[1m",
@@ -16,7 +21,7 @@ const C = {
 }
 
 function c(color: keyof typeof C, text: string): string {
-  return `${C[color]}${text}${C.reset}`
+  return USE_COLOR ? `${C[color]}${text}${C.reset}` : text
 }
 
 // --- helpers ---
@@ -41,6 +46,7 @@ function levenshtein(a: string, b: string): number {
 // --- search ---
 
 function fuzzySearch(query: string, candidates = keys, limit = 10): string[] {
+  if (query.length > 200) return []
   const q = query.toLowerCase()
   const exact: string[] = []
   const methodExact: string[] = []
@@ -150,7 +156,19 @@ function formatEntry(entry: Entry): string {
   return lines.join("\n")
 }
 
+function formatEntryJson(entry: Entry): string {
+  const { text, url } = extractMDN(entry.doc)
+  return JSON.stringify({ ...entry, doc: text, mdnUrl: url }, null, 2)
+}
+
 // --- output ---
+
+const PAGER_ALLOWLIST = new Set(["less", "more", "most", "bat", "pg", "cat"])
+
+function resolvePager(): string {
+  const raw = (process.env.PAGER ?? "less").split(/\s+/)[0]
+  return PAGER_ALLOWLIST.has(basename(raw)) ? raw : "less"
+}
 
 function print(output: string): void {
   if (!process.stdout.isTTY) {
@@ -162,8 +180,9 @@ function print(output: string): void {
     process.stdout.write(output)
     return
   }
-  const pager = (process.env.PAGER ?? "less").split(/\s+/)[0]
-  const result = spawnSync(pager, ["-R"], {
+  const pager = resolvePager()
+  const flags = pager === "bat" ? ["--paging=always", "--color=always"] : ["-R"]
+  const result = spawnSync(pager, flags, {
     input: output,
     stdio: ["pipe", "inherit", "inherit"],
   })
@@ -239,6 +258,64 @@ complete -F _js_ref js-ref`)
   }
 }
 
+// --- history ---
+
+function historyPath(): string {
+  const home = homedir()
+  const xdg = process.env.XDG_DATA_HOME
+  let base: string
+  if (xdg) {
+    const resolved = resolve(xdg)
+    base = resolved.startsWith(home + "/") || resolved === home
+      ? resolved
+      : join(home, ".local", "share")
+  } else {
+    base = join(home, ".local", "share")
+  }
+  return join(base, "js-ref", "history")
+}
+
+function appendHistory(key: string): void {
+  try {
+    const p = historyPath()
+    if (!existsSync(dirname(p))) mkdirSync(dirname(p), { recursive: true })
+    appendFileSync(p, key + "\n", "utf8")
+  } catch {}
+}
+
+function readHistory(limit = 20): string[] {
+  try {
+    const lines = readFileSync(historyPath(), "utf8").trimEnd().split("\n")
+    const seen = new Set<string>()
+    const result: string[] = []
+    for (let i = lines.length - 1; i >= 0; i--) {
+      const k = lines[i].trim()
+      if (k && DB[k] && !seen.has(k)) {
+        seen.add(k)
+        result.push(k)
+        if (result.length >= limit) break
+      }
+    }
+    return result
+  } catch {
+    return []
+  }
+}
+
+function printHistory(): void {
+  const entries = readHistory()
+  if (!entries.length) {
+    console.log(c("dim", "No history yet."))
+    process.exit(0)
+  }
+  console.log(`\n${c("bold", "Recent entries:")}\n`)
+  entries.forEach((k, i) => console.log(`  ${c("dim", String(i + 1).padStart(2))}  ${k}`))
+  console.log()
+  const chosen = IS_INTERACTIVE ? pickInteractive(entries) : entries[0]
+  print(formatEntry(DB[chosen]))
+  appendHistory(chosen)
+}
+
 // --- help ---
 
 function printHelp(): void {
@@ -251,6 +328,9 @@ ${c("bold", "Usage:")}
   js-ref --only <owner> [query] filter by owner (e.g. Array, Promise)
   js-ref --since <year> [query] filter by ES year (e.g. 2022)
   js-ref --fzf                  interactive search with fzf
+  js-ref --history              show recently viewed entries
+  js-ref --json                 output as JSON (machine-readable)
+  js-ref --first                auto-pick first match, no prompt
   js-ref --list                 list all entries
   js-ref --completion <shell>   print shell completion script (zsh/bash/fish)
   js-ref --version              print version
@@ -287,6 +367,9 @@ function main(): void {
   let since: number | null = null
   let listMode = false
   let fzfMode = false
+  let historyMode = false
+  let jsonMode = false
+  let firstMode = false
   let completion: string | null = null
   const positional: string[] = []
 
@@ -308,6 +391,12 @@ function main(): void {
       process.exit(0)
     } else if (arg === "--fzf") {
       fzfMode = true
+    } else if (arg === "--history") {
+      historyMode = true
+    } else if (arg === "--json") {
+      jsonMode = true
+    } else if (arg === "--first") {
+      firstMode = true
     } else if (arg === "--completion" && argv[i + 1]) {
       completion = argv[++i]
     } else if (arg === "--version" || arg === "-v") {
@@ -323,6 +412,11 @@ function main(): void {
 
   if (!argv.length) {
     printHelp()
+    process.exit(0)
+  }
+
+  if (historyMode) {
+    printHistory()
     process.exit(0)
   }
 
@@ -360,35 +454,73 @@ function main(): void {
 
   const query = positional[0]
 
+  const output = (entry: Entry) =>
+    jsonMode ? process.stdout.write(formatEntryJson(entry) + "\n") : print(formatEntry(entry))
+
   if (DB[query] && candidates.includes(query)) {
-    print(formatEntry(DB[query]))
+    appendHistory(query)
+    output(DB[query])
     process.exit(0)
   }
 
   const matches = fuzzySearch(query, candidates)
 
   if (!matches.length) {
-    console.log(c("dim", `No results for "${query}"`))
-    const hints = suggest(query, candidates)
-    if (hints.length) {
-      console.log(c("dim", "\nDid you mean?"))
-      for (const s of hints) console.log(`  ${c("dim", s)}`)
-      console.log()
+    if (jsonMode) process.stdout.write(JSON.stringify({ error: `No results for "${query}"` }) + "\n")
+    else {
+      console.log(c("dim", `No results for "${query}"`))
+      const hints = suggest(query, candidates)
+      if (hints.length) {
+        console.log(c("dim", "\nDid you mean?"))
+        for (const s of hints) console.log(`  ${c("dim", s)}`)
+        console.log()
+      }
     }
     process.exit(1)
   }
 
-  if (matches.length === 1) {
-    print(formatEntry(DB[matches[0]]))
+  if (jsonMode) {
+    const results = firstMode ? [matches[0]] : matches
+    process.stdout.write(JSON.stringify(results.map(k => {
+      const { text, url } = extractMDN(DB[k].doc)
+      return { ...DB[k], doc: text, mdnUrl: url }
+    }), null, 2) + "\n")
+    results.forEach(k => appendHistory(k))
     process.exit(0)
   }
 
-  console.log(`\n${c("bold", `Found ${matches.length} matches for "${query}":`)}\n`)
+  if (matches.length === 1) {
+    appendHistory(matches[0])
+    output(DB[matches[0]])
+    process.exit(0)
+  }
+
+  if (firstMode) {
+    appendHistory(matches[0])
+    output(DB[matches[0]])
+    process.exit(0)
+  }
+
+  if (matches.length <= 5) {
+    const out = matches.map(k => formatEntry(DB[k])).join("\n" + c("dim", "─".repeat(process.stdout.columns ?? 72)) + "\n")
+    print(out)
+    matches.forEach(k => appendHistory(k))
+    process.exit(0)
+  }
+
+  // 6+ matches: show list + first entry
+  console.log(`\n${c("bold", `Found ${matches.length} matches for "${query}"`)}\n`)
   matches.forEach((m, i) => console.log(`  ${c("dim", String(i + 1).padStart(2))}  ${m}`))
   console.log()
-
-  const chosen = process.stdin.isTTY ? pickInteractive(matches) : matches[0]
-  print(formatEntry(DB[chosen]))
+  if (IS_INTERACTIVE) {
+    const chosen = pickInteractive(matches)
+    appendHistory(chosen)
+    output(DB[chosen])
+  } else {
+    console.log(c("dim", `Showing first result. Use --first or --json for scripting.`))
+    appendHistory(matches[0])
+    output(DB[matches[0]])
+  }
 }
 
 main()
